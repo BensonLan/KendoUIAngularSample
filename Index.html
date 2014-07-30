@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BensonTest</title>
+    <meta charset="utf-8">
+    <script src="jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="angular.js"></script>
+
+    <link href="kendoUI/content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet">
+    <script src="kendoUI/js/kendo.all.min.js"></script>
+    <script src="kendoUI/content/shared/js/console.js"></script>
+
+    <script src="angular-kendo.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</head>
+<body ng-app='kendoapp'>
+<div ng-controller='kendoUIControl'>
+    <div>
+        <select kendo-drop-down-list k-options="thingsOptions"
+                ng-model="selectedThing"></select>
+        <h5>You Selected: {{selectedThing}}</h5>
+    </div>
+
+    <div>
+        <input kendo-date-picker
+               ng-model="datePickerAsString"
+               k-ng-model="datePickerAsDate"/>
+        <br/><b>ng-model:</b> {{datePickerAsString}}
+        <br/><b>k-ng-model:</b> {{datePickerAsDate}}
+        <br/>it's a date: {{datePickerAsDate|date:'yyyy/MM/dd'}}
+    </div>
+
+    <div>
+        <div kendo-list-view
+             k-data-source="data" k-selectable="true"
+             k-template="template" k-rebind="template"></div>
+        <button ng-click="changeTemplate()">Change template!</button>
+    </div>
+
+    <div>
+        <button class="k-button" ng-show="!gridOptions" ng-click="populate()">Populate!</button>
+        <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
+    </div>
+
+    <div>
+        <div kendo-grid k-options="mainGridOptions"></div>
+
+        <script type="text/x-kendo-template" id="template">
+            <div kendo-tab-strip>
+                <ul>
+                    <li class="k-state-active">Orders</li>
+                    <li>Contact information</li>
+                </ul>
+                <div>
+                    <div kendo-grid k-options="detailGridOptions(dataItem)"></div>
+                </div>
+                <div>
+                    <ul>
+                        <li>Country: <input ng-model="dataItem.Country" /></li>
+                        <li>City: <input ng-model="dataItem.City" /></li>
+                        <li>Address: {{dataItem.Address}}</li>
+                        <li>Home phone: {{dataItem.HomePhone}}</li>
+                    </ul>
+                </div>
+            </div>
+        </script>
+    </div>
+
+</div>
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>BensonTest</title>
+    <meta charset="utf-8">
+    <link href="kendoUI/content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="kendoUI/styles/kendo.dataviz.default.min.css" rel="stylesheet">
+    <script src="kendoUI/js/jquery.min.js"></script>
+    <script src="kendoUI/js/kendo.all.min.js"></script>
+    <script src="kendoUI/content/shared/js/console.js"></script>
+    <script type="text/javascript" src="angular/angular.js"></script>
+    <script type="text/javascript" src="elasticsearch-js/elasticsearch.angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    
+    
+</head>
+<body>
+        <a class="offline-button" href="../index.html">Back</a>
+    
+        <div id="example">
+            <div id="grid"></div>
+            <script>
+                $(document).ready(function () {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                            },
+                            pageSize: 20
+                        },
+                        height: 550,
+                        groupable: true,
+                        sortable: true,
+                        pageable: {
+                            refresh: true,
+                            pageSizes: true,
+                            buttonCount: 5
+                        },
+                        columns: [{
+                            field: "ContactName",
+                            title: "Contact Name",
+                            width: 200
+                        }, {
+                            field: "ContactTitle",
+                            title: "Contact Title"
+                        }, {
+                            field: "CompanyName",
+                            title: "Company Name"
+                        }, {
+                            field: "Country",
+                            width: 150
+                        }]
+                    });
+                });
+            </script>
+        </div>
+    
+</body>
+</html>-->
